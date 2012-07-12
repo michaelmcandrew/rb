@@ -4,18 +4,19 @@ require_once('functions.php');
 
 
 //Fetch rows from MYSQL into data object
-$select = "SELECT * FROM rb_data.contacts WHERE Col_17='Yes'";
+$select = "SELECT * FROM rb_data.contacts WHERE Col_18='Yes'";
 
 $results =CRM_Core_DAO::executeQuery($select);
 $i=0;
 while($results->fetch()){
 		//Org columns: 4 5 6 7 8 9 10 13
-	
+
 		//print_r($results->col_4." 4| ".$results->col_5." 5| ".$results->col_6." 6| ".$results->col_7." 7| ".$results->col_8." 8| ".$results->col_9." 9| ".$results->col_10." 10| ".$results->col_13."13 \n");
-		
+
 		$params=array(	'version' =>'3',
 								'contact_type' =>'Organization',
 								'organization_name' => $results->col_4,
+								'external_identifier' => 'o'.$results->_id
 							);
 				$contact_create=civicrm_api("Contact","create", $params);
 				print_r($contact_create['id']." ");
@@ -126,11 +127,6 @@ function createEmail($cid,$email){
 	handle_errors($email_create);
 }
 
-function handle_errors($result){
-	if($result['is_error']){
-		print_r($result);
-	}
-}
 
 // http://rb.local/civicrm/ajax/doc/api#/civicrm/ajax/rest?json=1&debug=1&version=3&entity=Contact&action=create&contact_type=Organization
 

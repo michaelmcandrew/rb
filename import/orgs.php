@@ -20,7 +20,7 @@ while($results->fetch()){
 							);
 				$contact_create=civicrm_api("Contact","create", $params);
 				print_r($contact_create['id']." ");
-				handle_errors($contact_create);
+				handle_errors($contact_create, $params);
 
 				createAddress($contact_create['id'],$results);
 				

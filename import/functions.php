@@ -5,9 +5,10 @@ function trimString($string){
 	return $string;
 }
 
-function handle_errors($result){
+function handle_errors($result,$params = NULL){
 	if($result['is_error']){
 		print_r($result);
+		print_r($params);
 	}
 }
 

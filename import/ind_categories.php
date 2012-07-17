@@ -95,14 +95,15 @@ while($results->fetch()){
 		$params=array();
 		$params['version']="3";
 		$params['entity_id']=$cid;
+		$params['originalId']=$results->_id;
 		$params['custom_1']=translateCategories($serviceAreaTranslation,$categories);
 		$params['custom_2']=translateCategories($org_type_translation,$categories);
 		$params['custom_3']=translateCategories($mailing_list_translation,$mailingLists);
 		// $groups=implode ( ',' , $params['custom_3'] );
 		// 		print_r($cid."|".$results->_id.$groups."\n");continue;
 		$addCategory=civicrm_api("CustomValue","create", $params);
-		handle_errors($addCategory);
-		if (count($params['custom_2'])!=0)print_r($cid." ".count($params['custom_2'])." ".count($params['custom_2'])." ".count($params['custom_2'])."\n");
+		handle_errors($addCategory, $params);
+		print_r($cid." ".count($params['custom_1'])." ".count($params['custom_2'])." ".count($params['custom_3'])."\n");
 		//print_r($cid);exit;
 
 	}

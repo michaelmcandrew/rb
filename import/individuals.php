@@ -63,7 +63,7 @@ while($results->fetch()){
 		
 		print_r($contact_create['id']." ");
 		
-		handle_errors($contact_create);
+		handle_errors($contact_create, $params);
 
 		createAddress($contact_create['id'],$results);
 		

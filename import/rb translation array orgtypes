@@ -1,0 +1,14 @@
+<?php
+
+$org_type_translation = array(
+	'Charity shops' => 'Charity shop',
+	'Funder' => 'Funder',
+	'Trust' => 'Funder',
+	'LBR Councillor' => 'LBR Councillor',
+	'Local authority' => 'Local govt not LBR',
+	'Press' => 'Media',
+	'PCT' => 'NHS service/officer',
+	'Political' => 'Political party',
+	'Schools' => 'School',
+	'Extended schools' => 'School'
+)

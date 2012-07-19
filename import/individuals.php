@@ -44,8 +44,7 @@ while($results->fetch()){
 		if(!($firstname OR $lastname)){
 			continue;
 		}
-
-			
+		
 		$params=array(
 			'version' =>'3',
 			'contact_type' =>'Individual',
@@ -53,6 +52,7 @@ while($results->fetch()){
 			'last_name' => $lastname,
 			'job_title' => trimString($results->col_3),
 			'current_employer' => trimString($results->col_4),
+			'external_identifier' => 'i'.$results->_id
 		);
 		if($results->col_0){
 			$params['prefix']=str_replace('.','' , $results->col_0 );
@@ -63,7 +63,7 @@ while($results->fetch()){
 		
 		print_r($contact_create['id']." ");
 		
-		handle_errors($contact_create);
+		handle_errors($contact_create, $params);
 
 		createAddress($contact_create['id'],$results);
 		
@@ -169,11 +169,7 @@ function createEmail($cid,$email){
 	handle_errors($email_create);
 }
 
-function handle_errors($result){
-	if($result['is_error']){
-		print_r($result);
-	}
-}
+
 
 // http://rb.local/civicrm/ajax/doc/api#/civicrm/ajax/rest?json=1&debug=1&version=3&entity=Contact&action=create&contact_type=Organization
 

@@ -1,7 +1,7 @@
 <?php
   /*
    +--------------------------------------------------------------------+
-   | CiviCRM version 4.0                                                |
+   | CiviCRM version 4.1                                                |
    +--------------------------------------------------------------------+
    | This file is a part of CiviCRM.                                    |
    |                                                                    |
@@ -36,7 +36,7 @@ class JFormFieldCiviPCPs extends JFormField {
 	 * @access	protected
 	 * @var		string
 	 */
-	var	$_name = 'CiviPCPs';
+	var	$type = 'CiviPCPs';
 	
     protected function getInput()	{
         
@@ -46,7 +46,7 @@ class JFormFieldCiviPCPs extends JFormField {
         // Initiate CiviCRM
 		require_once JPATH_ROOT.'/'.'administrator/components/com_civicrm/civicrm.settings.php';
 		require_once 'CRM/Core/Config.php';
-		$config =& CRM_Core_Config::singleton( );
+		$config = CRM_Core_Config::singleton( );
         
 		// Get list of all profiles and assign to options array
 		$options = array();

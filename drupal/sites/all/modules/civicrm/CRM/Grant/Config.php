@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -35,9 +34,5 @@
  */
 
 require_once 'CRM/Core/Component/Config.php';
-
-class CRM_Grant_Config extends CRM_Core_Component_Config {
-
-}
-
+class CRM_Grant_Config extends CRM_Core_Component_Config {}
 

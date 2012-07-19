@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -30,7 +29,7 @@
  *
  * @package CRM
  * @copyright CiviCRM LLC (c) 2004-2011
- * $Id: modifier.crmICalText.php 33004 2011-03-14 22:30:41Z kurund $
+ * $Id: modifier.crmICalText.php 40475 2012-05-17 00:55:16Z allen $
  *
  */
 
@@ -44,10 +43,7 @@
  */
 
 require_once 'CRM/Utils/ICalendar.php';
-
-function smarty_modifier_crmICalText( $str )
-{
-    return CRM_Utils_ICalendar::formatText( $str );
+function smarty_modifier_crmICalText($str) {
+  return CRM_Utils_ICalendar::formatText($str);
 }
-
 

@@ -98,7 +98,7 @@
                     // replace below code with the equivalent once method is available 
                     var startPosition = e.value.length;
                     var endPosition = startPosition + text.length;
-                    
+		    
                     // set the value
                     e.value = e.value.substr(0, startPosition) + text + e.value.substr( endPosition, e.value.length);
                     

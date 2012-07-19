@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -24,7 +24,7 @@
  +--------------------------------------------------------------------+
 *}
 {* success.tpl: Display page for Upgrades. Provides complete HTML doc.*}
-{if $config->userFramework neq 'Drupal'}
+{if $config->userSystem->is_drupal neq '1'}
     <h2>{$pageTitle}</h2>
 {/if}
 {if !$upgraded}

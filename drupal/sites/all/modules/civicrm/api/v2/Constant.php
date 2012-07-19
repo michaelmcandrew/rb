@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -31,7 +31,7 @@
  * @package CiviCRM_APIv2
  * @subpackage API_Constant
  * @copyright CiviCRM LLC (c) 2004-2011
- * @version $Id: Constant.php 33007 2011-03-14 22:52:10Z kurund $
+ * @version $Id: Constant.php 40475 2012-05-17 00:55:16Z allen $
  *
  */
 
@@ -45,7 +45,7 @@ require_once 'api/v2/utils.php';
  * pseudo constants used in CiviCRM
  *
  *  @param  string  Name of a public static method of
- *                  CRM_Core_PseudoContant: one of 
+ *                  CRM_Core_PseudoContant: one of
  *  <ul>
  *    <li>activityStatus</li>
  *    <li>activityType</li>
@@ -89,22 +89,22 @@ require_once 'api/v2/utils.php';
  *    <li>wysiwygEditor</li>
  *  </ul>
  */
-function civicrm_constant_get($name, $params = array()) 
-{
-    require_once 'CRM/Core/PseudoConstant.php';
-    $className = 'CRM_Core_PseudoConstant';
-    $callable  = "$className::$name";
-     
-    if (is_callable($callable)) {
-        if (empty($params)) {
-            $values = call_user_func( array( $className, $name ) );
-        } else {
-            $values = call_user_func_array( array( $className, $name ), $params );
-        }
-        return $values;
+function civicrm_constant_get($name, $params = array(
+  )) {
+  require_once 'CRM/Core/PseudoConstant.php';
+  $className = 'CRM_Core_PseudoConstant';
+  $callable = "$className::$name";
+
+  if (is_callable($callable)) {
+    if (empty($params)) {
+      $values = call_user_func(array($className, $name));
     }
+    else {
+      $values = call_user_func_array(array($className, $name), $params);
+    }
+    return $values;
+  }
 
-    return civicrm_create_error(ts('Unknown civicrm constant or method not callable'));
+  return civicrm_create_error(ts('Unknown civicrm constant or method not callable'));
 }
-
 

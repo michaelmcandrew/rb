@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -69,29 +69,36 @@
             {/if}
 
         {elseif call_user_func(array('CRM_Core_Permission','check'), 'delete contacts')}
+            {assign var='deleteParams' value="&reset=1&delete=1&cid=$contactId"}
             <li class="crm-delete-action crm-contact-delete">
-                <a href="{crmURL p='civicrm/contact/view/delete' q="reset=1&delete=1&cid=$contactId"}" class="delete button" title="{ts}Delete{/ts}">
-                <span><div class="icon delete-icon"></div>{ts}Delete{/ts}</span>
+                <a href="{crmURL p='civicrm/contact/view/delete' q=$deleteParams}" class="delete button" title="{ts}Delete{/ts}">
+                <span><div class="icon delete-icon"></div>{ts}Delete Contact{/ts}</span>
                 </a>
             </li>
         {/if}
 
         {* Previous and Next contact navigation when accessing contact summary from search results. *}
-        {if $nextContactID}
+        {if $nextPrevError}
+           <li class="crm-next-action">
+             {help id="id-next-prev-buttons"}&nbsp;
+           </li>
+        {else}
+          {if $nextContactID}
            {assign var='viewParams' value=$urlParams|cat:"&cid=$nextContactID"}
            <li class="crm-next-action">
              <a href="{crmURL p='civicrm/contact/view' q=$viewParams}" class="view button" title="{$nextContactName}">
              <span title="{$nextContactName}"><div class="icon next-icon"></div>{ts}Next{/ts}</span>
              </a>
            </li>
-        {/if}
-        {if $prevContactID}
+          {/if}
+          {if $prevContactID}
            {assign var='viewParams' value=$urlParams|cat:"&cid=$prevContactID"}
            <li class="crm-previous-action">
              <a href="{crmURL p='civicrm/contact/view' q=$viewParams}" class="view button" title="{$prevContactName}">
              <span title="{$prevContactName}"><div class="icon previous-icon"></div>{ts}Previous{/ts}</span>
              </a>
            </li>
+          {/if}
         {/if}
 
 
@@ -266,7 +273,12 @@
                             <table>
                                 <tr>
                                     <td class="label">{ts 1=$add.location_type}%1&nbsp;Address{/ts}
-                                        {if $config->mapAPIKey AND $add.geo_code_1 AND $add.geo_code_2}
+                                        {if $config->mapProvider AND 
+					 !empty($add.geo_code_1) AND
+					 is_numeric($add.geo_code_1) AND
+					 !empty($add.geo_code_2) AND 
+					 is_numeric($add.geo_code_2) 
+					 }
                                             <br /><a href="{crmURL p='civicrm/contact/map' q="reset=1&cid=`$contactId`&lid=`$add.location_type_id`"}" title="{ts 1=`$add.location_type`}Map %1 Address{/ts}"><span class="geotag">{ts}Map{/ts}</span></a>
                                         {/if}</td>
                                     <td class="crm-contact-address_display">

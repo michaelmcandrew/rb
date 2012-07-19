@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -64,15 +64,17 @@ function clearAmountOther() {
     <div id="intro_text" class="crm-section intro_text-section">
         {$intro_text}
     </div>
-
+{if $islifetime or $ispricelifetime }
+<div id="help">You have a current Lifetime Membership which does not need top be renewed.</div> 
+{/if}
 {if $priceSet && empty($useForMember)}
-    <div id="priceset">
+    <div id="priceset"> 
         <fieldset>
             <legend>{ts}Contribution{/ts}</legend>
             {include file="CRM/Price/Form/PriceSet.tpl" extends="Contribution"}
         </fieldset>
     </div>
-{else}
+{else}  
         {include file="CRM/Contribute/Form/Contribution/MembershipBlock.tpl" context="makeContribution"}
 
 	{if $form.amount}
@@ -123,7 +125,7 @@ function clearAmountOther() {
         		{if $is_email_receipt}
         		    {ts}You will receive an email receipt for each recurring contribution. The receipts will include a link you can use if you decide to modify or cancel your future contributions.{/ts} 
         		{/if}
-        		</p>
+        		</span></p>
 		    </div>
 	    </div>
 	{/if} 
@@ -294,6 +296,11 @@ function clearAmountOther() {
     	<div id="footer_text" class="crm-section contribution_footer_text-section">
 			<p>{$footer_text}</p>
     	</div>
+    {/if}
+    <br>
+    {if $isShare}
+        {capture assign=contributionUrl}{crmURL p='civicrm/contribute/transact' q="$qParams" a=true fe=1 h=1}{/capture}
+        {include file="CRM/common/SocialNetwork.tpl" url=$contributionUrl title=$title pageURL=$contributionUrl}
     {/if}
 </div>
 

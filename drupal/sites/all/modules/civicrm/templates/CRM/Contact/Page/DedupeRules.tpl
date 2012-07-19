@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -47,11 +47,11 @@
                 </thead>
                 {foreach from=$rows item=row}
                   <tr class="{cycle values="odd-row,even-row"}">
-                    <td>{if isset($row.name)}{$row.name}{/if}</td>
+                    <td>{$row.title}</td>
                     <td>{$row.contact_type_display}</td>	
                     <td>{$row.level}</td>	
                     {if $row.is_default}
-                        <td><img src="{$config->resourceBase}/i/check.gif" alt="{ts}Default{/ts}" /></td>    
+                        <td><img src="{$config->resourceBase}i/check.gif" alt="{ts}Default{/ts}" /></td>    
                     {else}
                         <td></td>
                     {/if}

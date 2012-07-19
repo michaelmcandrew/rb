@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 3.4                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -197,15 +197,16 @@ function loadPetitionList( )
 			     {sClass:'crm-petition-isActive'                                  },
 			     {sClass:'crm-petition-action',                    bSortable:false}
 			     ],
-		"sPaginationType": "full_numbers",
-		"sDom"       : 'rt<"crm-datatable-pager-bottom"ip>',
-	   	"bServerSide": true,
-                "bJQueryUI": true,
-	   	"sAjaxSource": sourceUrl,
-		"oLanguage":{"sEmptyTable"  : noRecordFoundMsg,
+             "sPaginationType": "full_numbers",
+             "sDom"       : 'rt<"crm-datatable-pager-bottom"ip>',
+             "bServerSide": true,
+             "bJQueryUI": true,
+             "sAjaxSource": sourceUrl,
+             "asStripClasses" : [ "odd-row", "even-row" ],
+             "oLanguage":{"sEmptyTable"  : noRecordFoundMsg,
 		             "sZeroRecords" : noRecordFoundMsg },
-		"fnDrawCallback": function() { cj().crmtooltip(); },
-		"fnRowCallback": function( nRow, aData, iDisplayIndex ) { 
+             "fnDrawCallback": function() { cj().crmtooltip(); },
+             "fnRowCallback": function( nRow, aData, iDisplayIndex ) { 
 				 //insert the id for each row for enable/disable.
 				 var rowId = 'petition_row_' + aData[0];
 				 cj(nRow).attr( 'id', rowId );

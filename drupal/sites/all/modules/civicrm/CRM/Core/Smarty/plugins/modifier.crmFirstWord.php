@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -47,10 +46,9 @@
  * @return string        the new modified html string
  * @access public
  */
-function smarty_modifier_crmFirstWord( $string ) {
-    $string = trim( $string );
-    $words = explode( ' ', $string );
-    return $words[0];
+function smarty_modifier_crmFirstWord($string) {
+  $string = trim($string);
+  $words = explode(' ', $string);
+  return $words[0];
 }
-
 

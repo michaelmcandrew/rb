@@ -70,6 +70,9 @@ function civicrm_conf_init() {
         if ( strpos( $currentDir, 'sites' . DIRECTORY_SEPARATOR . 'all' . DIRECTORY_SEPARATOR . 'modules' ) !== false ) {
             // seems like this is in drupal5 dir location
             $confdir = $currentDir . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..';
+        } else if ( strpos( $currentDir, 'plugins' . DIRECTORY_SEPARATOR . 'civicrm' . DIRECTORY_SEPARATOR . 'civicrm' ) !==false ){
+             //if its wordpress 
+            $confdir = $currentDir . DIRECTORY_SEPARATOR . '..';
         } else {
             $confdir = $currentDir . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'sites';
         }
@@ -107,4 +110,9 @@ function civicrm_conf_init() {
     return $conf;
 }
 
-include_once civicrm_conf_init( ) . '/civicrm.settings.php';
+$settingsFile = civicrm_conf_init( ) . '/civicrm.settings.php';
+$error = @include_once( $settingsFile );
+if ( $error == false ) {
+    echo "Could not load the settings file at: {$settingsFile}\n";
+    exit( );
+}

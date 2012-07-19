@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -68,7 +68,7 @@
     	<tr id="row_{$row.id}"class=" crm-price-option crm-price-option_{$row.id} {cycle values="odd-row,even-row"} {$row.class}{if NOT $row.is_active} disabled{/if}">
             <td class="crm-price-option-label">{$row.label}</td>
             <td class="crm-price-option-value">{$row.amount|crmMoney}</td>
-	    <td class="crm-price-option-is_default">{if $row.is_default}<img src="{$config->resourceBase}/i/check.gif" alt="{ts}Default{/ts}" />{/if}</td>
+	    <td class="crm-price-option-is_default">{if $row.is_default}<img src="{$config->resourceBase}i/check.gif" alt="{ts}Default{/ts}" />{/if}</td>
             <td class="nowrap crm-price-option-order">{$row.weight}</td>
             <td id="row_{$row.id}_status" class="crm-price-option-is_active">{if $row.is_active eq 1} {ts}Yes{/ts} {else} {ts}No{/ts} {/if}</td>
             <td>{$row.action|replace:'xx':$row.id}</td>
@@ -80,7 +80,7 @@
         {/strip}
         {if $addMoreFields}
         <div class="action-link">
-            <a href="{crmURL q="reset=1&action=add&fid=$fid&sid=$sid"}" class="button"><span>&raquo; {ts 1=$fieldTitle}New Option for '%1'{/ts}</span></a>
+            <a href="{crmURL q="reset=1&action=add&fid=$fid&sid=$sid"}" class="button"><span><div class="icon add-icon"></div> {ts 1=$fieldTitle}New Option for '%1'{/ts}</span></a>
         </div>
 	{/if}
     </div>

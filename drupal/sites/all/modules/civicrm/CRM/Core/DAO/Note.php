@@ -1,7 +1,7 @@
 <?php
 /*
 +--------------------------------------------------------------------+
-| CiviCRM version 4.0                                                |
+| CiviCRM version 4.1                                                |
 +--------------------------------------------------------------------+
 | Copyright CiviCRM LLC (c) 2004-2011                                |
 +--------------------------------------------------------------------+
@@ -58,7 +58,7 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
     static $_links = null;
     /**
      * static instance to hold the values that can
-     * be imported / apu
+     * be imported
      *
      * @var array
      * @static
@@ -66,7 +66,7 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
     static $_import = null;
     /**
      * static instance to hold the values that can
-     * be exported / apu
+     * be exported
      *
      * @var array
      * @static
@@ -125,7 +125,7 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
     /**
      * Foreign Key to Note Privacy Level (which is an option value pair and hence an implicit FK)
      *
-     * @var int
+     * @var string
      */
     public $privacy;
     /**
@@ -212,8 +212,10 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
                 ) ,
                 'privacy' => array(
                     'name' => 'privacy',
-                    'type' => CRM_Utils_Type::T_INT,
+                    'type' => CRM_Utils_Type::T_STRING,
                     'title' => ts('Privacy') ,
+                    'maxlength' => 255,
+                    'size' => CRM_Utils_Type::HUGE,
                 ) ,
             );
         }
@@ -249,7 +251,7 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
     {
         if (!(self::$_import)) {
             self::$_import = array();
-            $fields = & self::fields();
+            $fields = self::fields();
             foreach($fields as $name => $field) {
                 if (CRM_Utils_Array::value('import', $field)) {
                     if ($prefix) {
@@ -272,7 +274,7 @@ class CRM_Core_DAO_Note extends CRM_Core_DAO
     {
         if (!(self::$_export)) {
             self::$_export = array();
-            $fields = & self::fields();
+            $fields = self::fields();
             foreach($fields as $name => $field) {
                 if (CRM_Utils_Array::value('export', $field)) {
                     if ($prefix) {

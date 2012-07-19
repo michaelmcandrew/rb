@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -93,7 +93,11 @@
                         </span>  
                     {/if} 
                 {elseif $element.html_type eq 'Autocomplete-Select'}
+                  {if $element.data_type eq 'ContactReference'}
+                    {include file="CRM/Custom/Form/ContactReference.tpl"}
+                  {else}
                     {include file="CRM/Custom/Form/AutoComplete.tpl"}
+                  {/if}
                 {/if}
             </td>
         </tr>

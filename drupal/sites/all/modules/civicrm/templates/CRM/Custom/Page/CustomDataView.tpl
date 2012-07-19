@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -29,10 +29,10 @@
     {foreach from=$customValues item=cd_edit key=cvID}
 	<table class="no-border">
 	    {assign var='index' value=$groupId|cat:"_$cvID"}
-	    {if $editOwnCustomData or ($showEdit and $editCustomData and $groupId)}	
+        {if $editOwnCustomData or ($showEdit and $editCustomData and $groupId)}	
 		<tr>
 		    <td>
-			<a href="{crmURL p="civicrm/contact/view/cd/edit" q="tableId=`$contactId`&cid=`$contactId`&groupId=`$groupId`&action=update&reset=1"}" class="button" style="margin-left: 6px;"><span><div class="icon edit-icon"></div>{ts 1=$cd_edit.title}Edit %1{/ts}</span></a><br/><br/>
+			<a href="{crmURL p="civicrm/contact/view/cd/edit" q="tableId=`$contactId`&cid=`$contactId`&groupID=`$groupId`&action=update&reset=1"}" class="button" style="margin-left: 6px;"><span><div class="icon edit-icon"></div>{ts 1=$cd_edit.title}Edit %1{/ts}</span></a><br/><br/>
 		    </td>
 		</tr>      
 	    {/if}
@@ -75,6 +75,13 @@
 						<td class="html-adjust"><a href="{$element.field_value.fileURL}">{$element.field_value.fileName}</a></td>
 					    {/if}
 					{else}
+                                            {if $element.field_data_type == 'Money'}
+                                                {if $element.field_type == 'Text'}
+                                                    <td class="html-adjust">{$element.field_value|crmMoney}</td>
+                                                {else}
+                                                    <td class="html-adjust">{$element.field_value}</td>
+                                                {/if}
+                                            {else}
 					    <td class="html-adjust">
                         {if $element.contact_ref_id}
                             <a href='/civicrm/contact/view?reset=1&cid={$element.contact_ref_id}'>
@@ -84,6 +91,7 @@
                             </a>
                         {/if}
                         </td>
+                                            {/if}
 					{/if}
 				    {/if}
 				</tr>

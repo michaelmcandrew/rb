@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 3.4                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -41,7 +41,7 @@ require_once 'api/v3/utils.php';
  *
  * This API is used to create new contact_type or update any of the existing
  * In case of updating existing contact_type, id of that particular contact_type must
- * be in $params array. 
+ * be in $params array.
  *
  * @param array $params  (referance) Associative array of property
  *                       name/value pairs to insert in new 'contact_type'
@@ -50,25 +50,20 @@ require_once 'api/v3/utils.php';
  *
  * @access public
  */
-function civicrm_api3_contact_type_create( $params )
-{
-    civicrm_api3_verify_mandatory($params,_civicrm_api3_get_DAO(__FUNCTION__),array('name','parent_id'));
-    if (!array_key_exists('label',$params))
-        $params['label'] = $params['name'];
-    if (!array_key_exists('is_active',$params))
-      $params['is_active'] = true;
-    print_r(CRM_Contact_BAO_ContactType::add($params));
-    die ("toto");
-    return _civicrm_api3_basic_create(_civicrm_api3_get_BAO(__FUNCTION__), $params);
+function civicrm_api3_contact_type_create($params) {
+  require_once 'CRM/Utils/String.php';
+  civicrm_api3_verify_mandatory($params, _civicrm_api3_get_DAO(__FUNCTION__), array('name', 'parent_id'));
+  if (!array_key_exists('label', $params)) {
+    $params['label'] = $params['name'];
+  }
+  if (!array_key_exists('is_active', $params)) {
+    $params['is_active'] = TRUE;
+  }
 
+  $params['name'] = CRM_Utils_String::munge($params['name']);
+  return _civicrm_api3_basic_create(_civicrm_api3_get_BAO(__FUNCTION__), $params);
 }
 
-function _civicrm_api3_contact_type_create_spec(&$fields){
-  $fields['name']['api.required'] =1;
-  $fields['parent_id']['api.required'] =1; 
-  $fields['is_activte']['api.default'] =1;
-  
-}
 /**
  * Returns array of contact_types  matching a set of one or more group properties
  *
@@ -79,11 +74,9 @@ function _civicrm_api3_contact_type_create_spec(&$fields){
  * @return array  (referance) Array of matching contact_types
  * @access public
  */
-function civicrm_api3_contact_type_get( $params )
-{
-    civicrm_api3_verify_mandatory($params);
-    return _civicrm_api3_basic_get(_civicrm_api3_get_BAO(__FUNCTION__), $params);
-
+function civicrm_api3_contact_type_get($params) {
+  civicrm_api3_verify_mandatory($params);
+  return _civicrm_api3_basic_get(_civicrm_api3_get_BAO(__FUNCTION__), $params);
 }
 
 /**
@@ -100,7 +93,7 @@ function civicrm_api3_contact_type_get( $params )
  *
  * @access public
  */
-function civicrm_api3_contact_type_delete( $params )
-{
-    return _civicrm_api3_basic_delete(_civicrm_api3_get_BAO(__FUNCTION__), $params);
+function civicrm_api3_contact_type_delete($params) {
+  return _civicrm_api3_basic_delete(_civicrm_api3_get_BAO(__FUNCTION__), $params);
 }
+

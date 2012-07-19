@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -36,11 +36,10 @@
  *
  */
 
-
 /**
  * Files required for this package
  */
-require_once 'api/v3/utils.php';
+
 require_once 'CRM/Core/BAO/UFMatch.php';
 
 /**
@@ -50,17 +49,11 @@ require_once 'CRM/Core/BAO/UFMatch.php';
  *
  * @return array $result
  * @access public
- * @static
+ * {@getfields UFMatch_get}
  * @example UFMatchGet.php
  * @todo this class is missing delete & create functions (do after exisitng functions upgraded to v3)
-*/
-function civicrm_api3_uf_match_get($params)
-{
-        civicrm_api3_verify_mandatory($params);
-        return _civicrm_api3_basic_get('CRM_Core_BAO_UFMatch', $params);
-
+ */
+function civicrm_api3_uf_match_get($params) {
+  return _civicrm_api3_basic_get('CRM_Core_BAO_UFMatch', $params);
 }
-
-
-
 

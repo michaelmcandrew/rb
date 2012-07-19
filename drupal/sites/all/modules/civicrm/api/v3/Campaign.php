@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 3.4                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -34,27 +34,32 @@
  */
 
 require_once 'CRM/Campaign/BAO/Campaign.php';
-require_once 'api/v3/utils.php';
 
 /**
  * create/update campaign
  *
  * This API is used to create new campaign or update any of the existing
  * In case of updating existing campaign, id of that particular campaign must
- * be in $params array. 
+ * be in $params array.
  *
  * @param array $params  (referance) Associative array of property
  *                       name/value pairs to insert in new 'campaign'
  *
  * @return array   campaign array
- *
+ * {@getfields campaign_create}
  * @access public
  */
-function civicrm_api3_campaign_create( $params )
-{
-    civicrm_api3_verify_mandatory($params,null,array('title'));
-    return _civicrm_api3_basic_create(_civicrm_api3_get_BAO(__FUNCTION__), $params);
-
+function civicrm_api3_campaign_create($params) {
+  return _civicrm_api3_basic_create(_civicrm_api3_get_BAO(__FUNCTION__), $params);
+}
+/*
+ * Adjust Metadata for Create action
+ * 
+ * The metadata is used for setting defaults, documentation & validation
+ * @param array $params array or parameters determined by getfields
+ */
+function _civicrm_api3_campaign_create_spec(&$params) {
+  $params['title']['api.required'] = 1;
 }
 
 /**
@@ -66,12 +71,10 @@ function civicrm_api3_campaign_create( $params )
  *
  * @return array  (referance) Array of matching campaigns
  * @access public
+ * {@getfields campaign_get}
  */
-function civicrm_api3_campaign_get( $params )
-{
-    civicrm_api3_verify_mandatory($params);
-    return _civicrm_api3_basic_get(_civicrm_api3_get_BAO(__FUNCTION__), $params);
-
+function civicrm_api3_campaign_get($params) {
+  return _civicrm_api3_basic_get(_civicrm_api3_get_BAO(__FUNCTION__), $params);
 }
 
 /**
@@ -85,10 +88,10 @@ function civicrm_api3_campaign_get( $params )
  *
  * @return array  (referance) returns flag true if successfull, error
  *                message otherwise
- *
+ * {@getfields campaign_delete}
  * @access public
  */
-function civicrm_api3_campaign_delete( $params )
-{
-    return _civicrm_api3_basic_delete(_civicrm_api3_get_BAO(__FUNCTION__), $params);
+function civicrm_api3_campaign_delete($params) {
+  return _civicrm_api3_basic_delete(_civicrm_api3_get_BAO(__FUNCTION__), $params);
 }
+

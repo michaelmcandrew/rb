@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -70,8 +70,8 @@
                     <td class="crm-tag-description">{$row.description} </td>
                     <td class="crm-tag-parent">{$row.parent} {if $row.parent_id}({$row.parent_id}){/if}</td>
         	    <td class="crm-tag-used_for">{$row.used_for}</td>
-                    <td class="crm-tag-is_tagset">{if $row.is_tagset}<img src="{$config->resourceBase}/i/check.gif" alt="{ts}Tag Set{/ts}" />{/if}</td>
-                    <td class="crm-tag-is_reserved">{if $row.is_reserved}<img src="{$config->resourceBase}/i/check.gif" alt="{ts}Reserved{/ts}" />{/if}</td>
+                    <td class="crm-tag-is_tagset">{if $row.is_tagset}<img src="{$config->resourceBase}i/check.gif" alt="{ts}Tag Set{/ts}" />{/if}</td>
+                    <td class="crm-tag-is_reserved">{if $row.is_reserved}<img src="{$config->resourceBase}i/check.gif" alt="{ts}Reserved{/ts}" />{/if}</td>
                     <td>{$row.action|replace:'xx':$row.id}</td>
                 </tr>
                 {/foreach}
@@ -135,8 +135,7 @@ function mergeTag( fromId ) {
 			cj("#tag_name").val( "" );
 			cj("#tag_name_id").val( null );
 
-			var tagUrl = {/literal}"{crmURL p='civicrm/ajax/mergeTagList' h=0}"{literal};
-                        tagUrl = tagUrl + "&fromId=" + fromId;
+			var tagUrl = {/literal}"{crmURL p='civicrm/ajax/mergeTagList' h=0 q='fromId='}"{literal} + fromId;
 
 			cj("#tag_name").autocomplete( tagUrl, {
 				width: 260,
@@ -169,7 +168,7 @@ function mergeTag( fromId ) {
 				
                 /* send synchronous request so that disabling any actions for slow servers*/
 				var postUrl = {/literal}"{crmURL p='civicrm/ajax/mergeTags' h=0 }"{literal}; 
-				var data    = 'fromId='+ fromId + '&toId='+ toId + "&key={/literal}{crmKey name='civicrm/ajax/mergeTags'}{literal}";
+				var data    = '{fromId:'+ fromId + ',toId:'+ toId + ",key:{/literal}{crmKey name='civicrm/ajax/mergeTags'}{literal}}";
                 cj.ajax({ type     : "POST", 
 					  url      : postUrl, 
 					  data     : data, 

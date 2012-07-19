@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -26,7 +25,6 @@
  +--------------------------------------------------------------------+
 */
 
-
 /**
  *
  * @package CRM
@@ -36,12 +34,10 @@
  */
 
 require_once 'CRM/Mailing/Page/Common.php';
-
-class CRM_Mailing_Page_Resubscribe extends CRM_Mailing_Page_Common
-{
-    function run() {
-        $this->_type = 'resubscribe';
-        return parent::run( );
-    }
+class CRM_Mailing_Page_Resubscribe extends CRM_Mailing_Page_Common {
+  function run() {
+    $this->_type = 'resubscribe';
+    return parent::run();
+  }
 }
 

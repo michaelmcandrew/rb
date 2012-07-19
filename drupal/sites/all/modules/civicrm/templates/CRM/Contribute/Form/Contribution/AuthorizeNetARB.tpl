@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -60,6 +60,7 @@
    {if $invoiceNumber}
    <order>  
      <invoiceNumber>{$invoiceNumber}</invoiceNumber>
+     {if $name}<description>{$name}</description>{/if}
    </order>
    {/if}  
     <customer>

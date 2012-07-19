@@ -56,7 +56,7 @@ function contact_create_expectedresult(){
       '1' => array( 
           'id' => 1,
           'contact_type' => 'Individual',
-          'contact_sub_type' => '',
+          'contact_sub_type' => 'null',
           'do_not_email' => '',
           'do_not_phone' => '',
           'do_not_mail' => '',
@@ -102,10 +102,10 @@ function contact_create_expectedresult(){
               'is_error' => 0,
               'version' => 3,
               'count' => 1,
-              'id' => 2,
+              'id' => 1,
               'values' => array( 
                   '0' => array( 
-                      'id' => 2,
+                      'id' => 1,
                       'contact_id' => 1,
                       'contribution_type_id' => 1,
                       'contribution_page_id' => '',

@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -48,8 +47,7 @@
  * @return string        the new modified html string
  * @access public
  */
-function smarty_modifier_crmInsert( $string, $attribute, $value, $insertBefore = '/>' ) {
-    return str_replace( $insertBefore, ' ' . $attribute . '="' . $value . '"' . $insertBefore, $string );
+function smarty_modifier_crmInsert($string, $attribute, $value, $insertBefore = '/>') {
+  return str_replace($insertBefore, ' ' . $attribute . '="' . $value . '"' . $insertBefore, $string);
 }
-
 

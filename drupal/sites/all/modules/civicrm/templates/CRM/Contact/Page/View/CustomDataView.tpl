@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -29,7 +29,7 @@
     {assign var="count" value=$customGroupCount%2}
     {if $count eq $side }
         {foreach from=$customValues item=cd_edit key=cvID}
-            <div class="customFieldGroup ui-corner-all">
+            <div class="customFieldGroup ui-corner-all {$cd_edit.name}">
                 <table id="{$cd_edit.name}_{$count}" >
                   <tr class="columnheader">
                     <td colspan="2" class="grouplabel">

@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -212,14 +212,14 @@ function selectValue( val ) {
 	if ( isMailing ) { 
  	  cj('div.html').hover( 
 	  function( ) {
-	     if ( cj('#'+ html_message).tinymce() ) {
-	     cj('#'+ html_message).tinymce().onKeyUp.add(function() {
+	     if ( tinyMCE.get(html_message) ) {
+	     tinyMCE.get(html_message).onKeyUp.add(function() {
  	        verify( );
   	     });
 	     }
           },
 	  function( ) {
-	     if ( cj('#'+ html_message).tinymce() ) {
+	     if ( tinyMCE.get(html_message) ) {
 	       if ( tinyMCE.get(html_message).getContent() ) {
                  verify( );
                } 
@@ -290,9 +290,6 @@ function selectValue( val ) {
 
     cj(function() {
         cj('.accordion .head').addClass( "ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ");
-
-        // restructuring css as per jQuery tab width
-        cj('.ui-state-default, .ui-widget-content .ui-state-default').css( 'width', '95%' );
         cj('.resizable-textarea textarea').css( 'width', '99%' );
         cj('.grippie').css( 'margin-right', '3px');
         cj('.accordion .head').hover( function() { cj(this).addClass( "ui-state-hover");

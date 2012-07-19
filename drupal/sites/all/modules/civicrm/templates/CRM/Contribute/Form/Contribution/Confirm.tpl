@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -44,6 +44,9 @@
                 {ts 1=$button}To complete your contribution, click the <strong>%1</strong> button below.{/ts}
             {/if}
         </p> 
+    </div>
+    <div id="crm-submit-buttons" class="crm-submit-buttons">
+        {include file="CRM/common/formButtons.tpl" location="top"}
     </div>
     {if $is_pay_later}
         <div class="bold pay_later_receipt-section">{$pay_later_receipt}</div>

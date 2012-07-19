@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -34,12 +34,9 @@
  */
 
 require_once 'CRM/Core/Selector/Controller.php';
-
 class CRM_Contact_Selector_Controller extends CRM_Core_Selector_Controller {
-    function getQill( ) {
-        return $this->_object->getQILL( );
-    }
-
+  function getQill() {
+    return $this->_object->getQILL();
+  }
 }
-
 

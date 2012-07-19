@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -43,7 +43,7 @@
 	    {/if}
 	    <tr class="crm-price-option-form-block-label">
                <td class="label">{$form.label.label}</td>
-               <td>{$form.label.html}</td>
+               <td>{if $action == 2}{include file='CRM/Core/I18n/Dialog.tpl' table='civicrm_price_field_value' field='label' id=$sid}{/if}{$form.label.html}</td>
             </tr>
             <tr class="crm-price-option-form-block-amount">
                 <td class="label">{$form.amount.label}</td>
@@ -51,15 +51,15 @@
             </tr>
             <tr class="crm-price-option-form-block-description">
                 <td class="label">{$form.description.label}</td>
-                <td>{$form.description.html}</td>
+                <td>{if $action == 2}{include file='CRM/Core/I18n/Dialog.tpl' table='civicrm_price_field_value' field='description' id=$sid}{/if}{$form.description.html}</td>
             </tr>
             <tr class="crm-price-option-form-block-count">
                 <td class="label">{$form.count.label}</td>
-                <td>{$form.count.html}</td>
+                <td>{$form.count.html} {help id="id-participant-count" file="CRM/Price/Page/Field.hlp"}</td>
             </tr>
             <tr class="crm-price-option-form-block-max_value">
                 <td class="label">{$form.max_value.label}</td>
-                <td>{$form.max_value.html}</td>
+                <td>{$form.max_value.html} {help id="id-participant-max" file="CRM/Price/Page/Field.hlp"}</td>
             </tr>
             <tr class="crm-price-option-form-block-weight">
                <td class="label">{$form.weight.label}</td>

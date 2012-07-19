@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -36,33 +35,32 @@
  *
  */
 
-abstract class CRM_Core_Component_Config
-{
+abstract class CRM_Core_Component_Config {
 
-    /**
-     * Gets the list of class variables from specific component's 
-     * configuration file and injects them into system wide
-     * configuration object.
-     *
-     * @return array collection of component settings
-     * @access public
-     *
-     */
-    public function add( $config, $oldMode ) {
-        foreach( get_class_vars( get_class( $this ) ) as $key => $value ) {
-            $config->$key = $value;
-        }
+  /**
+   * Gets the list of class variables from specific component's
+   * configuration file and injects them into system wide
+   * configuration object.
+   *
+   * @return array collection of component settings
+   * @access public
+   *
+   */
+  public function add($config, $oldMode) {
+    foreach (get_class_vars(get_class($this)) as $key => $value) {
+      $config->$key = $value;
     }
+  }
 
-    /**
-     * TODO
-     */
-    public function setDefaults( &$defaults ) {
-        foreach( get_class_vars( get_class( $this ) ) as $key => $value ) {
-            if ( ! isset( $defaults[$key] ) ) {
-                $defaults[$key] = $value;
-            }
-        }
+  /**
+   * TODO
+   */
+  public function setDefaults(&$defaults) {
+    foreach (get_class_vars(get_class($this)) as $key => $value) {
+      if (!isset($defaults[$key])) {
+        $defaults[$key] = $value;
+      }
     }
-
+  }
 }
+

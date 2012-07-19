@@ -1,6 +1,6 @@
 {*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -27,9 +27,9 @@
 {capture assign=newEventURL}{crmURL p="civicrm/event/add" q="action=add&reset=1"}{/capture}
 {capture assign=configPagesURL}{crmURL p="civicrm/event/manage" q="reset=1"}{/capture}
 {capture assign=icalFile}{crmURL p='civicrm/event/ical' q="reset=1" fe=1 a=1}{/capture}
-{capture assign=icalFeed}{crmURL p='civicrm/event/ical' q="reset=1&page=1" fe=1 a=1}{/capture}
-{capture assign=rssFeed}{crmURL p='civicrm/event/ical' q="reset=1&page=1&rss=1" fe=1 a=1}{/capture}
-{capture assign=htmlFeed}{crmURL p='civicrm/event/ical' q="reset=1&page=1&html=1" fe=1 a=1}{/capture}
+{capture assign=icalFeed}{crmURL p='civicrm/event/ical' q="reset=1&list=1" fe=1 a=1}{/capture}
+{capture assign=rssFeed}{crmURL p='civicrm/event/ical' q="reset=1&list=1&rss=1" fe=1 a=1}{/capture}
+{capture assign=htmlFeed}{crmURL p='civicrm/event/ical' q="reset=1&list=1&html=1" fe=1 a=1}{/capture}
 
 {if $eventSummary.total_events}
     <div class="float-right">
@@ -57,7 +57,7 @@
     <tbody>
     {foreach from=$eventSummary.events item=values key=id}
     <tr class="crm-event_{$id}">
-        <td class="crm-event-eventTitle"><a href="{crmURL p="civicrm/event/info" q="reset=1&id=`$id`"}" title="{ts}View event info page"{/ts}>{$values.eventTitle}</a></td>
+        <td class="crm-event-eventTitle"><a href="{crmURL p="civicrm/event/info" q="reset=1&id=`$id`"}" title="{ts}View event info page{/ts}">{$values.eventTitle}</a></td>
         <td class="crm-event-id">{$id}</td>
         <td class="crm-event-eventType">{$values.eventType}</td>
         <td class="crm-event-isPublic">{$values.isPublic}</td>
@@ -106,10 +106,11 @@
               <div class="crm-configure-actions">
 		 <span id="{$id}" class="btn-slide">{ts}Configure{/ts}
         	    	<ul class="panel" id="panel_info_{$id}">
-        		    <li><a title="Info and Settings" class="action-item-wrap" href="{crmURL p='civicrm/event/manage/eventInfo' q="reset=1&action=update&id=`$id`"}">{ts}Info and Settings{/ts}</a></li>
+        		    <li><a title="Info and Settings" class="action-item-wrap" href="{crmURL p='civicrm/event/manage/settings' q="reset=1&action=update&id=`$id`"}">{ts}Info and Settings{/ts}</a></li>
         		    <li><a title="Location" class="action-item-wrap {if NOT $values.is_show_location} disabled{/if}" href="{crmURL p='civicrm/event/manage/location' q="reset=1&action=update&id=`$id`"}">{ts}Location{/ts}</a></li>
         		    <li><a title="Fees" class="action-item {if NOT $values.is_monetary} disabled{/if}" href="{crmURL p='civicrm/event/manage/fee' q="reset=1&action=update&id=`$id`"}">{ts}Fees{/ts}</a></li>
         		    <li><a title="Online Registration" class="action-item-wrap {if NOT $values.is_online_registration} disabled{/if}" href="{crmURL p='civicrm/event/manage/registration' q="reset=1&action=update&id=`$id`"}">{ts}Online Registration{/ts}</a></li>
+        		    <li><a title="Conference Slots" class="action-item-wrap {if NOT $values.is_subevent} disabled{/if}" href="{crmURL p='civicrm/event/manage/conference' q="reset=1&action=update&id=`$id`"}">{ts}Conference Slots{/ts}</a></li>
         		    <li><a title="Tell a Friend" class="action-item-wrap {if NOT $values.friend} disabled{/if}" href="{crmURL p='civicrm/event/manage/friend' q="reset=1&action=update&id=`$id`"}">{ts}Tell a Friend{/ts}</a></li>
         	 </span>
         	 </div>

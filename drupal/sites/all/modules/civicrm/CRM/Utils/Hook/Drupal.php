@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -35,36 +35,30 @@
  */
 
 require_once 'CRM/Utils/Hook.php';
-
 class CRM_Utils_Hook_Drupal extends CRM_Utils_Hook {
+  function invoke($numParams,
+    &$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
+    $fnSuffix
+  ) {
+    static $first = FALSE;
+    static $allModules = array();
 
-    static function invoke( $numParams,
-                            &$arg1, &$arg2, &$arg3, &$arg4, &$arg5,
-                            $fnSuffix ) {
-        $result = array( );
-        // copied from user_module_invoke
-        if (function_exists('module_list')) {
-            foreach ( module_list() as $module) { 
-                $fnName = "{$module}_{$fnSuffix}";
-                if ( function_exists( $fnName ) ) {
-                    if ( $numParams == 1 ) {
-                        $fResult = $fnName( $arg1 );
-                    } else if ( $numParams == 2 ) {
-                        $fResult = $fnName( $arg1, $arg2 );
-                    } else if ( $numParams == 3 ) {
-                        $fResult = $fnName( $arg1, $arg2, $arg3 );
-                    } else if ( $numParams == 4 ) {
-                        $fResult = $fnName( $arg1, $arg2, $arg3, $arg4 );
-                    } else if ( $numParams == 5 ) {
-                        $fResult = $fnName( $arg1, $arg2, $arg3, $arg4, $arg5 );
-                    }
-                    if ( is_array( $fResult ) ) {
-                        $result = array_merge( $result, $fResult );
-                    }
-                }
-            }
-        }
-        return empty( $result ) ? true : $result;
-   }
+    if (!$first ||
+      empty($allModules)
+    ) {
+      $first = TRUE;
 
+      // copied from user_module_invoke
+      if (function_exists('module_list')) {
+        $allModules = module_list();
+      }
+
+      $this->requireCiviModules($allModules);
+    }
+
+    return $this->runHooks($allModules, $fnSuffix,
+      $numParams, $arg1, $arg2, $arg3, $arg4, $arg5
+    );
+  }
 }
+

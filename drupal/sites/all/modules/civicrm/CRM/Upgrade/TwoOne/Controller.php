@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -35,17 +34,15 @@
  */
 
 require_once 'CRM/Upgrade/Controller.php';
-
 class CRM_Upgrade_TwoOne_Controller extends CRM_Upgrade_Controller {
-
-    function &getPages( ) {
-        $pages = array( 'CRM_Upgrade_TwoOne_Form_Step1' => null,
-                        'CRM_Upgrade_TwoOne_Form_Step2' => null,
-                        'CRM_Upgrade_TwoOne_Form_Step3' => null,
-                        'CRM_Upgrade_TwoOne_Form_Step4' => null,
-                        );
-        return $pages;
-    }
+  function &getPages() {
+    $pages = array(
+      'CRM_Upgrade_TwoOne_Form_Step1' => NULL,
+      'CRM_Upgrade_TwoOne_Form_Step2' => NULL,
+      'CRM_Upgrade_TwoOne_Form_Step3' => NULL,
+      'CRM_Upgrade_TwoOne_Form_Step4' => NULL,
+    );
+    return $pages;
+  }
 }
-
 

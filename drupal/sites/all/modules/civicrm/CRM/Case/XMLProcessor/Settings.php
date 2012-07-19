@@ -1,8 +1,7 @@
 <?php
-
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.0                                                |
+ | CiviCRM version 4.1                                                |
  +--------------------------------------------------------------------+
  | Copyright CiviCRM LLC (c) 2004-2011                                |
  +--------------------------------------------------------------------+
@@ -33,31 +32,30 @@
  * $Id$
  *
  */
- 
-require_once 'CRM/Case/XMLProcessor.php';
 
+require_once 'CRM/Case/XMLProcessor.php';
 class CRM_Case_XMLProcessor_Settings extends CRM_Case_XMLProcessor {
 
-	private $_settings = array();
-		
-	// Input: The base filename without the .xml extension
-	// Output: An array of settings.
-	function run($filename = 'settings') {
-        $xml = $this->retrieve( $filename );
+  private $_settings = array();
 
-       	// For now it's not an error. In the future it might be a required file. 
-        if ( $xml !== false ) {
-        	// There's only one setting right now, and only one value.
-        	if ($xml->group[0]) {
-        		if ($xml->group[0]->attributes()) {
-        			$groupName = (string) $xml->group[0]->attributes()->name;
-					if ($groupName) {
-						$this->_settings['groupname'] = $groupName;
-					}
-        		}
-        	}
+  // Input: The base filename without the .xml extension
+  // Output: An array of settings. 
+  function run($filename = 'settings') {
+    $xml = $this->retrieve($filename);
+
+    // For now it's not an error. In the future it might be a required file.
+    if ($xml !== FALSE) {
+      // There's only one setting right now, and only one value.
+      if ($xml->group[0]) {
+        if ($xml->group[0]->attributes()) {
+          $groupName = (string) $xml->group[0]->attributes()->name;
+          if ($groupName) {
+            $this->_settings['groupname'] = $groupName;
+          }
         }
-        return $this->_settings;
-	}
+      }
+    }
+    return $this->_settings;
+  }
 }
 

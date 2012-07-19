@@ -6,7 +6,7 @@
     display: inline;
 }
 
-#crm-container .hiddenElement {
+#crm-container .hiddenElement, #crm-container-snippet .hiddenElement {
     display   	    : none;
 }
 
@@ -258,6 +258,10 @@ div#crm-container {
     font-size: .9em;
 }
 
+/*
+** Ensures max-width is reset to css default for the images in the maps
+*/
+#Map img { max-width: none; }
 
 /*
 ** CRM form layout classes (from www.realworldstyle.com)
@@ -716,6 +720,11 @@ div.spacer,
 #crm-container ul.indented {
     padding-left: 3em;
 }
+#crm-container tr.subevent td.event-title,
+#crm-container tr.subevent td.event-info {
+    padding-left: 3em;
+}
+
 
 /*
 ** CSS for links from Drupal Blocks.
@@ -759,7 +768,8 @@ div.block-civicrm li, #crm-container ul li, #crm-container ul.treeview li {
 }
 
 #crm-container .form-layout-compressed td.description {
-    padding: 0px 0px 5px 20px;
+    padding: 20px 5px 0 5px;
+    font-size: 1em;
 }
 
 /* Page and form-level 'help' */
@@ -1374,7 +1384,6 @@ table.campaign td,
 }
 
 #crm-container .thermometer-pointer {
-    background:transparent url(images/thermometer-pointer.gif) no-repeat scroll 130px 3px;
     padding-left:45px; /* width of thermometer + a little actual padding */
     position:absolute;
     top:-10px; /* vertically center text on percentage raised */
@@ -1486,24 +1495,38 @@ table.campaign td,
 
 }
 
-#crm-container table.nestedActivitySelector tr.priority-urgent {         
+#crm-container table.nestedActivitySelector tr.priority-urgent,
+#crm-container table.nestedActivitySelector tr a.priority-urgent
+{         
     background-color: #FFDDDD;
 }
 
-#crm-container table.nestedActivitySelector tr.priority-low {
+#crm-container table.nestedActivitySelector tr.priority-low,
+#crm-container table.nestedActivitySelector tr a.priority-low
+{
     background-color: #DDFFDD;
 }
 
-#crm-container table.nestedActivitySelector tr.status-scheduled {
+#crm-container table.nestedActivitySelector tr.status-scheduled,
+#crm-container table.nestedActivitySelector tr a.status-scheduled
+{
     color: #006633;   
 }
 
-#crm-container table.nestedActivitySelector tr.status-completed {
+#crm-container table.nestedActivitySelector tr.status-completed,
+#crm-container table.nestedActivitySelector tr a.status-completed
+{
     color: #333333; 
 }
 
-#crm-container table.nestedActivitySelector tr.status-overdue {
+#crm-container table.nestedActivitySelector tr.status-overdue,
+#crm-container table.nestedActivitySelector tr a.status-overdue
+{
     color: #FF0000;
+}
+
+#crm-container table.nestedActivitySelector tr a.crm-activity-status {
+	cursor: pointer;
 }
 
 #crm-container table.nestedActivitySelector tr a {
@@ -2079,6 +2102,11 @@ div.grippie {
     margin: 4px 0px 4px 2px;
 }
 
+#crm-container .register_link-top {
+    float: right;
+    margin-left: 8px;
+}
+
 .crm-clear-link {
     margin-left: .5em;
 }
@@ -2096,6 +2124,7 @@ div.grippie {
 }
 #crm-container .crm-button input  {
     background:none;
+    _background:#6C6C6C; /* IE6 only */
     border:medium none;
     color:#FFF;
     cursor:pointer;
@@ -2104,7 +2133,7 @@ div.grippie {
     margin:0 0 0 0px;
     padding:1px 8px 2px 4px;
 }
-#crm-container .crm-button-type-cancel {margin-left:20px;}
+#crm-container .crm-button-type-cancel, #crm-container .crm-button-type-back {margin-left:20px;}
 #crm-container .crm-button-type-cancel input { color:#E6E6DC!important; }
 
 #crm-container a.button,
@@ -2144,6 +2173,7 @@ div.grippie {
     padding:2px 4px;
     margin:0px;
     background: none;
+    _background:#6C6C6C; /* IE6 only */
     border:none;
 }
 
@@ -2316,8 +2346,7 @@ span.icon {
     color:#333;
 }
 
-.light-icon, .ui-widget-content .light-icon {background-image:url("../packages/jquery/jquery-ui-1.8.11/css/smoothness/images/ui-icons_454545_256x240.png")}
-.dark-icon {background-image:url("../packages/jquery/jquery-ui-1.8.11/css/smoothness/images/ui-icons_888888_256x240.png")}
+.dark-icon {background-image:url("../packages/jquery/jquery-ui-1.8.16/css/smoothness/images/ui-icons_222222_256x240.png")}
 .red-icon {background-image:url("../i/icons/jquery-ui-8A1F11.png")}
 
 .edit-icon { background-position: -66px -114px;}
@@ -2328,7 +2357,7 @@ span.icon {
 .delete-icon { background-position: -179px -99px;}
 .details-icon { background-position: -129px -112px;}
 .button:hover .delete-icon {
-    background-image:url("../packages/jquery/jquery-ui-1.8.11/css/smoothness/images/ui-icons_cd0a0a_256x240.png")!important;
+    background-image:url("../packages/jquery/jquery-ui-1.8.16/css/smoothness/images/ui-icons_cd0a0a_256x240.png")!important;
 }
 
 .restore-icon { background-position:0px -66px;background-image:url("../i/icons/jquery-ui-91CE00.png"); }
@@ -2352,6 +2381,7 @@ span.icon {
 .check-icon { background-position: -66px -146px; }
 .refresh-icon { background-position:-65px -81px; }
 .settings-icon { background-position:-178px -114px; }
+.search-icon { background-position:-161px -114px; }
 .email-icon { background-position:-81px -98px; }
 .preview-icon { background-position:-227px -129px; }
 .play-icon { background-position: -3px -161px; }
@@ -2552,7 +2582,6 @@ span.icon {
 
 /* Pop-up help icon - eliminate forced line break */
 div.helpicon {
-    background  : transparent url(../i/quiz.png) no-repeat;
     display     : inline;
     cursor      : pointer;
     background-position:-128px -98px;
@@ -2568,20 +2597,6 @@ div.crm-accordion-header div.helpicon {
     background-image:url(../i/icons/jquery-ui-F5F6F1.png);
     float: right;
 }
-
-div.statusicon {
-    background  : transparent url(../i/quiz.png) no-repeat;
-    display     : inline-block;
-    cursor      : pointer;
-    background-position:-48px -144px;
-    background-image:url("../packages/jquery/jquery-ui-1.8.11/css/smoothness/images/ui-icons_222222_256x240.png");    
-    background-color:#CCC;
-    width:16px;
-    height:16px;
-    overflow:hidden;
-    text-indent: -10000px;
-}
-
 
 div#crm-toolTip {
     padding   : 10px;
@@ -2687,7 +2702,7 @@ div#crm-toolTip #hide-tooltip {
     margin-right : 45px;
 }
 
-#crm-container ul.token-input-list-facebook, ul.token-input-list-facebook li.leaf {
+#crm-container ul.token-input-list-facebook, ul.token-input-list-facebook li.leaf, #crm-container ul li {
   list-style-image:none;
 }
 
@@ -2750,7 +2765,7 @@ div#civicrm-dashboard form {
 .ui-widget-content .ui-state-focus, 
 .ui-widget-header .ui-state-focus { 
 border: 0px solid #70716b; 
-background: #484e4c url("../packages/jquery/jquery-ui-1.8.11/css/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x; 
+background: #484e4c url("../packages/jquery/jquery-ui-1.8.16/css/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x; 
 font-weight: normal; 
 color: #f5f6f1; 
 }
@@ -2890,6 +2905,9 @@ table.crm-info-panel .label  {
     #mainTabContainer li.disabled a:link {
         color: #999999 !important;
     }
+    #crm-container tr.crm-job{
+        text-decoration: none !important;
+    }
 
 #crm-container table.selector td {
     border-right:1px dotted #DDDDDD;
@@ -2987,7 +3005,7 @@ table.crm-info-panel td.label {
 }
 
 #contact-summary .crm-accordion-wrapper .crm-accordion-header .crm-accordion-pointer {
-	background-image:url(../i/icons/jquery-ui-3e3e3e.png);
+	background-image:url(../i/icons/jquery-ui-3E3E3E.png);
 }		
 
 /* warning labels and messages */
@@ -3124,7 +3142,9 @@ div#crm-toolTip
 }
 
 /* Special styling for specific form buttons */
-#crm-container span.crm-button_qf_Main_upload input {
+#crm-container span.crm-button_qf_Main_upload input,
+#crm-container span.crm-button_qf_Confirm_next input,
+#crm-container span.crm-button_qf_Register_upload input {
     font-size: 1.2em;
 }
 
@@ -3161,3 +3181,17 @@ div#crm-toolTip
     position: static;
     z-index: -100;
 }
+
+#crm-container .crm-socialnetwork {
+    margin-top: 1em;
+}
+
+#crm-container .crm-fb-tweet-buttons  {
+    width: 93%;
+}
+#crm-container div.finalconf-button       { float:right; padding:5px 0 0 0; }
+#crm-container div.finalconf-button input { margin:0; }
+#crm-container div.finalconf-intro        { padding-bottom:12px; font-style:italic; }
+#crm-container h4.finalconf-item          { border-top:1px solid #ccc; padding:8px 0 8px 10px; margin:0; }
+#crm-container div.finalconf-itemdesc     { font-style:italic; padding:6px 12px 6px 12px; color:#666; float:right; width:60%; }
+#crm-container h4.finalconf-btm           { border-bottom:1px solid #ccc; margin-bottom:20px; }

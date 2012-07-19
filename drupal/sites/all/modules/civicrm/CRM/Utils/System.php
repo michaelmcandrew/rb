@@ -872,8 +872,7 @@ class CRM_Utils_System {
         $config = CRM_Core_Config::singleton( );
         $req_headers = CRM_Utils_System::getRequestHeaders();
         if ( $config->enableSSL             &&
-             ( ! isset( $_SERVER['HTTPS'] ) ||
-               strtolower( $_SERVER['HTTPS'] )  == 'off' ) &&
+             ( ! self::isSSL() ) &&
                strtolower( $req_headers['X_FORWARDED_PROTO'] ) != 'https' ) {
             // ensure that SSL is enabled on a civicrm url (for cookie reasons etc)
             $url = "https://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
@@ -1312,6 +1311,15 @@ class CRM_Utils_System {
         
         return $url;
     }
+    
+    static function isSSL() {
+		return (
+			isset($_SERVER['HTTPS']) && 
+			!empty($_SERVER['HTTPS']) &&
+			strtolower($_SERVER['HTTPS']) != 'off'
+		) ? true : false;
+	}
+	
 
     /**
      * Append the contents of an 'extra' smarty template file if it is present in

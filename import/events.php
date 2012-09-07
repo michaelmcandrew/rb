@@ -1,7 +1,7 @@
 <?php
 require_once('initialise.php');
 require_once('functions.php');
-
+date_default_timezone_set('UTC');
 
 //Fetch rows from MYSQL into data object
 $select = "SELECT * FROM rb_data.training";
@@ -29,17 +29,17 @@ while($results->fetch()){
 															// event shoudl not be piblice!!!!!
 															);
 	$i++;
-//	if ($i==7) { break; }
+//	if ($i==7) { break; }8
 }
 foreach ($events as $event){
 	$params=array();
   print_r($event['title']."\n");
-	// print_r($event['date']."\n");
+	 print_r($event['date']."\n");
 	// print_r($event['max_participants']."\n");
 	// print_r("\n");
 
 	$params=array ('version' =>'3',
-				'start_date' => convertDate($event['date']),
+				'start_date' => converttheDate($event['date']),
 				'event_type_id' => '6',
 				'title' => $event['title'],
 				'is_active' => '1',

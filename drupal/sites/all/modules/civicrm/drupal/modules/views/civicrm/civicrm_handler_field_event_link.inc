@@ -1,7 +1,7 @@
 <?php
 /*
  +--------------------------------------------------------------------+
- | CiviCRM version 4.1                                                |
+ | CiviCRM version 4.2                                                |
  +--------------------------------------------------------------------+
  | This file is a part of CiviCRM.                                    |
  |                                                                    |
@@ -108,9 +108,10 @@ class civicrm_handler_field_event_link extends views_handler_field {
         // LINKING TO EVENT REGISTRATION PAGE
       case 'registration':
         if (user_access('register for events') && $data !== NULL && $data !== '') {
-          require_once 'CRM/Core/Config.php';
+	     require_once 'CRM/Core/Config.php';
           $config = CRM_Core_Config::singleton();
-          if ($config->enable_cart) {
+          if ($enable_cart =
+            CRM_Core_BAO_Setting::getItem(CRM_Core_BAO_Setting::EVENT_PREFERENCES_NAME, 'enable_cart')) {
             require_once 'CRM/Event/Cart/BAO/EventInCart.php';
             //TODO don't call for every row
             $link = CRM_Event_Cart_BAO_EventInCart::get_registration_link($values->{$this->aliases['id']});

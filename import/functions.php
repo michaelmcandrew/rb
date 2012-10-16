@@ -34,6 +34,7 @@ function registerParticipant($contactId,$eventId){
 							'event_id' => $eventId,
 							'contact_id' => $contactId);
 		$participant_results=civicrm_api("Participant","create", $participant_params);
+		print_r(" P".$participant_results['id']."  ");
 		handle_errors($participant_results, $participant_params);
 }
 ?>

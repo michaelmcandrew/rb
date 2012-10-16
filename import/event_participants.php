@@ -2,54 +2,78 @@
 require_once('initialise.php');
 require_once('functions.php');
 
-
 //Fetch rows from MYSQL into data object
 $select = "SELECT * FROM rb_data.training";
 
 $results =CRM_Core_DAO::executeQuery($select);
 $i=0;
 
-
-
 while($results->fetch()){
-	if (!(trimString($results->col_0) AND trimString($results->col_1))){
+	$firstname = trimString($results->col_0);
+	$lastname = trimString($results->col_1);
+	$email = trimString($results->col_5);
+	$event_title=trimString($results->col_12);
+	$event_date=trimString($results->col_14);
+
+	if (!( $firstname AND $lastname AND $event_title AND  $event_date)){
 		continue;
 	}
-	if (!(trimString($results->col_5))){
+	if (!$email){
 		continue;
 	}
-	print_r($results->_id." ".$results->col_0." ".$results->col_1."\n");
+	print_r("\n");
+	print_r($results->_id." ".$firstname." ".$lastname."\n");
 
 	$params= array('version' =>'3',
-	'email' => trimString($results->col_5),
+	'email' => $email,
+	'first_name' => $firstname,
+	'last_name' => $lastname,
 	'sequential' => '1');
-	$email_results=civicrm_api("Email","get",$params);
-	if ($email_results['count']!=0){
-		print_r($email_results);
+	$contact_results=civicrm_api("Contact","get",$params);
 
-		//call to event search function send date, title, get back id
-		
-		//add event to existing contact
+	if ($contact_results['count']!=0){
+
+		print_r("found email add to contact"."\n");
+		$eventId = eventSearch($event_title,$event_date);
+		if (!$eventId) { 
+			print_r("ERROR: Missing event ID!!!");
+			exit; 
+		}
+		print_r("event id: ".$eventId);
+		print_r("\n");
+		print_r("contact id: ".$contact_results['id']);
+		print_r("\n");
+		registerParticipant($contact_results['id'],$eventId);
+
+		}
+		else{
+			print_r("NO email create contact"."\n");
+			$eventId = eventSearch($event_title,$event_date);
+			print_r("event id: ".$eventId);
+			print_r("\n");
+
+			//create a new contact
+			$contact_params = array( 
+				'first_name' => $firstname,
+				'last_name' => $lastname,
+				'contact_type' => 'Individual',
+				'source' => 'event data',
+				'email' => $email,
+				'version' => 3,
+				'api.participant.create' => array( 
+					'event_id' => $eventId,
+				),
+			);
+		}
+		print_r($contact_params);
+
+
+		$i++;
+		//if ($i==10) { break; }
 	}
-	else{
-		print_r("NO email create contact"."\n");
 
-		//create a new contact
-
-		//call to event search function send date, title, get back id
-
-		// add event to said contact
-
-
-	}
-
-
-	$i++;
-	if ($i==2) { break; }
-}
-
-
-print_r($i."\n");
+print_r("\n");
+print_r("TOTAL:  ".$i."\n");
 
 function createAddress($cid,$results){
 	//print_r($results);exit;

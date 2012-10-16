@@ -19,13 +19,21 @@ function converttheDate($date){
 }
 
 function eventSearch($event_title, $date){
-	
-	$event_params=array ('version=3',
-	'sequential' =>'1',
-	'title' => $event_title);
+	$date = converttheDate($date);
+	$event_params=array ('version'=> 3,
+						'sequential' =>'1',
+						'title' => $event_title,
+						'event_start_date' => $date);
 	
 	$event_results=civicrm_api("Event","get", $event_params);
 	return $event_results['id'];
 }
 
+function registerParticipant($contactId,$eventId){
+		$participant_params=array ('version'=> 3,
+							'event_id' => $eventId,
+							'contact_id' => $contactId);
+		$participant_results=civicrm_api("Participant","create", $participant_params);
+		handle_errors($participant_results, $participant_params);
+}
 ?>

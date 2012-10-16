@@ -2,7 +2,7 @@
 require_once('initialise.php');
 
 //remove (initial 10) contacts that were created
-$select = "SELECT * FROM civicrm_contact WHERE id > 4";
+$select = "SELECT * FROM civicrm_contact WHERE source = 'event data'";
 
 $results = CRM_Core_DAO::executeQuery($select);
 //print_r($results);exit;
